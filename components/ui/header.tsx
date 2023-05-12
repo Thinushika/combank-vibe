@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const Navbar = () => {
@@ -20,8 +21,8 @@ const Navbar = () => {
 
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav ms-auto justify-content-lg-end">
-                <a className="nav-link px-4" aria-current="page" href="/">Home</a>
-                <a className="nav-link px-4" href="/gallery">Gallery</a>
+                <Link className="nav-link px-4" aria-current="page" href="/">Home</Link>
+                <Link className="nav-link px-4" href="/gallery">Gallery</Link>
               </div>
             </div>
           </div>
