@@ -3,7 +3,7 @@
 @font-face {
   font-family: "CCOldPress";
   /* src: url("/fonts/CCOldPress.ttf"); */
-  src: url("../public/fonts/Candara_Bold.ttf");
+  src: url("/fonts/Candara_Bold.ttf");
 }
 
 * {
@@ -106,7 +106,7 @@ button {
 }
 
 .background_home {
-  background-image: url("../public/bg.png");
+  background-image: url("/bg.png");
   background-position: top left;
   background-size: cover;
   background-repeat: no-repeat;
@@ -116,7 +116,7 @@ button {
 
 }
 .background_pages {
-  background-image: url("../public/bg-section.png");
+  background-image: url("/bg-section.png");
   background-position: top left;
   background-size: cover;
   background-repeat: no-repeat;
@@ -353,7 +353,7 @@ button {
 }
 
 .image-swiper-button-prev{
-  background-image: url('../public/left.png');
+  background-image: url('/left.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
