@@ -1,11 +1,4 @@
-import { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import Image from 'next/image';
-import LoadingIcons from 'react-loading-icons';
-import { AiOutlineSend } from 'react-icons/ai';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Script from 'next/script';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -14,6 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Layout from '@/components/layout';
+import Link from 'next/link';
 
 
 
@@ -41,12 +35,13 @@ export default function Home() {
                     <h2 className="text-center px-2 text-white" style={{ fontWeight: "bold" }}>
                       Interested? Check the future you NOW
                     </h2>
+                    <Link href={'/chooseOption'} className='d-flex justify-content-center align-items-center'>
                     <button type="submit" className="mt-3" style={{
                       backgroundColor: "#ee3035", color: "#fff", fontWeight: "bold", height: "50px"
                     }}
                     >
                       Get Started
-                    </button>
+                    </button></Link>
                   </div>
                 </div>
               </div>

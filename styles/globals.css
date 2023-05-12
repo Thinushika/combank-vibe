@@ -115,7 +115,64 @@ button {
   width: 100vw;
 
 }
+.background_pages {
+  background-image: url("../public/bg-section.png");
+  background-position: top left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  width: 100vw;
 
+}
+.footer-icons{
+  width: 30px !important;
+  height: 30px !important;
+}
+.transparent-form{
+  background-color: #ffffff1a;
+  border-radius: 20px;
+  border: solid 1px #ffffff5b;
+}
+.transparent-select-box{
+  background-color: #ffffff1a;
+  border-radius: 20px;
+  border: solid 1px #ffffff5b;
+  width: 70vw;
+}
+.transparent-input{
+  background-color: #ffffff3b;
+  border-radius: 50px;
+  line-height: 18px;
+  font-size: 16px;
+  font-family: var(--font-family-Regular);
+  border: none;
+}
+.checkbox-style{
+  width: 22px;
+  height: 22px;
+}
+.transparent-input::placeholder{
+  color: #272727;
+}
+.submit-btn{
+  width: 150px;
+  border-radius: 8px;
+  /* box-shadow: inset; */
+  text-transform: uppercase;
+  color: white;
+  background-color: #ed3434;
+  border: none;
+  font-family: var(--font-family-Regular);
+  font-size: 22px;
+}
+.pages-height{
+  height: 100vh;
+}
+.correct-img{
+  width: 80px !important;
+  height: 80px !important;
+}
 .background_slider {
   background-color: #fff;
   padding-top: 0px !important;
@@ -125,6 +182,16 @@ button {
 }
 .hero-container{
   height: 70vh;
+}
+.select-box{
+  background-color: #0f012d;
+  width: 300px;
+  height: 300px;
+  border-radius: 12px;
+}
+.icon-size{
+  width: 150px !important;
+  height: 150px !important;
 }
 .sub-container{
   height: 50vh;
@@ -153,7 +220,11 @@ button {
   display: flex;
   justify-content: space-between;
 }
-
+.min-height{
+  min-height: calc(100vh - (80px)) !important;
+  height: auto;
+  max-height: auto;
+}
 .gallery_link,
 .gallery_link h2 {
   position: absolute;
@@ -282,16 +353,35 @@ button {
   width: 50px;
   height: 50px;
 }
-
+.option-font{
+  font-size: 25px !important
+}
+.font-option-page{
+  font-size: 28px !important;
+}
 @media screen and (max-width: 992px) {
   :root {
     --space-horizontal: 20px;
     --space-vertical: 40px;
   }
+  .transparent-select-box{
+    min-width: 100%;
+    margin: 20px;
+  }
   .footer_background {
     height: auto;
   }
-
+  .font-option-page{
+    font-size: 22px !important;
+  }
+  .min-height{
+    min-height: calc(100vh - (205px)) !important;
+    height: auto;
+    max-height: auto;
+  }
+  .option-font{
+    font-size: 20px !important
+  }
   .background_home {
     height: auto;
     padding-top: 100px !important;
@@ -339,6 +429,11 @@ button {
     color: #000;
     width: 100%;
   }
+  .select-box{
+    background-color: #0f012d;
+    width: 150px;
+    height: 150px;
+  }
 
   .home-txt-container {
     width: 100%;
@@ -346,6 +441,13 @@ button {
   .hero-image{
     width: 300px;
     height: auto;
+  }
+  .icon-size{
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .option-font{
+    font-size: 14px !important
   }
 }
 

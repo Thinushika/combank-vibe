@@ -14,7 +14,7 @@ const Navbar = () => {
             </a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="bi bi-list toggle-icon-styles"></span>
+              <span className="bi bi-list toggle-icon-styles" style={{color: "#fff !important"}}></span>
             </button>
 
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
