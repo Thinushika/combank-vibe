@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-const chooseOption = () => {
+const ChooseOption = () => {
     const [selected, setSelected] = useState('');
 
     const handleSelect = () => {
@@ -75,4 +75,4 @@ const chooseOption = () => {
     )
 }
 
-export default chooseOption
+export default ChooseOption
