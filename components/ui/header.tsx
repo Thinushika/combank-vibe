@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 const Navbar = () => {
@@ -10,7 +11,7 @@ const Navbar = () => {
 
           <div className="container-fluid">
             <a className="navbar-brand m-0 p-0" href="./index.html">
-              <img src="/vibelogo.png" alt="logo" style={{width: "100px", height: "auto"}} />
+              <Image src="/vibelogo.png" alt="logo"  className='header-logo-1' width={100} height={40} />
             </a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +29,7 @@ const Navbar = () => {
       </div>
       <div className="col-12 col-lg-2 d-none d-lg-flex justify-content-center align-items-center">
         <a className="navbar-combank-brand m-0 p-0" href="./index.html">
-          <img src="/commlogo.png" alt="logo" style={{width: "200px", height: "auto"}} />
+          <Image src="/commlogo.png" alt="logo" className='header-logo-2' width={200} height={20} />
         </a>
       </div>
     </div>

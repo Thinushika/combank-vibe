@@ -261,7 +261,14 @@ button {
   font-style: 33px;
   font-weight: bold;
 }
-
+.header-logo-1{
+  width: 100px !important;
+  height: auto !important;
+}
+.header-logo-2{
+  width: 200px !important;
+  height: auto !important;
+}
 
 
 .para-text {

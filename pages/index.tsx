@@ -97,28 +97,28 @@ export default function Home() {
           }}
         >
           <SwiperSlide>
-            <img src="/sliderimg-1.png" alt="" className="img-fluid" />
+            <Image src="/sliderimg-1.png" alt="" width={250} height={250} className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/sliderimg-2.png" alt="" className="img-fluid" />
+            <Image src="/sliderimg-2.png" alt="" width={250} height={250} className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/sliderimg-3.png" alt="" className="img-fluid" />
+            <Image src="/sliderimg-3.png" alt="" width={250} height={250} className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/sliderimg-4.png" alt="" className="img-fluid" />
+            <Image src="/sliderimg-4.png" alt="" width={250} height={250} className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/sliderimg-1.png" alt="" className="img-fluid" />
+            <Image src="/sliderimg-1.png" alt="" width={250} height={250} className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/sliderimg-2.png" alt="" className="img-fluid" />
+            <Image src="/sliderimg-2.png" alt="" width={250} height={250} className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/sliderimg-3.png" alt="" className="img-fluid" />
+            <Image src="/sliderimg-3.png" alt="" width={250} height={250} className="img-fluid" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="/sliderimg-4.png" alt="" className="img-fluid" />
+            <Image src="/sliderimg-4.png" alt="" width={250} height={250} className="img-fluid" />
           </SwiperSlide>
           
         </Swiper>
