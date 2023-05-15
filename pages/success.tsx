@@ -1,8 +1,16 @@
 import Layout from '@/components/layout'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Success = () => {
+    const [aiMessage, setAiMessage] = useState(null);
+
+    useEffect(() => {
+        const aiMessageString = window.localStorage.getItem("aiMessage");
+        if (aiMessageString) {
+            setAiMessage(JSON.parse(aiMessageString));
+        }
+    }, []);
     return (
         <Layout>
             <div className="container-fluid m-0 p-0 background_pages">
@@ -15,6 +23,11 @@ const Success = () => {
                                 <p className="text-white font-18 mb-3">
                                     Your Image is now being generated and you will receive it shortly via email
                                 </p>
+                                {aiMessage ? (
+                                                        <p>{aiMessage}</p>
+                                                    ) : (
+                                                        <p>No AI message received yet</p>
+                                                    )}
                                 <Image src={'/correct.png'} className='correct-img mb-5' alt='' width={107} height={107} ></Image>
                                 
                             </div>

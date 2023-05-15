@@ -5,7 +5,9 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export default async function (req: { body: { question: string; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: { message: string; } | { message: string; } | { message: string; }; result?: string | undefined; }): void; new(): any; }; }; }) {
+export default async function (req: { body: {
+  [x: string]: string; question: string; 
+}; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: { message: string; } | { message: string; } | { message: string; }; result?: string | undefined; }): void; new(): any; }; }; }) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -15,22 +17,37 @@ export default async function (req: { body: { question: string; }; }, res: { sta
     return;
   }
 
-  const userQuestion = req.body.question || '';
-  if (userQuestion.trim().length === 0) {
-    res.status(400).json({
-      error: {
-        message: "Please enter a valid question",
-      }
-    });
-    return;
-  }
+  const name = req.body.name || '';
+  const age = req.body.age || '';
+  const gender = req.body.gender || '';
+  const location = req.body.location || '';
+  const interests = req.body.interests || '';
+  const ambition = req.body.ambition || '';
+  const education = req.body.education || '';
+
+  console.log(location, ambition)
+  // if (userQuestion.trim().length === 0) {
+  //   res.status(400).json({
+  //     error: {
+  //       message: "Please enter a valid question",
+  //     }
+  //   });
+  //   return;
+  // }
 
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Friendly reply to: ${userQuestion} and do Not ask any questions.`,
+      prompt: `Friendly give addvise to following question:
+      My name is ${name} 
+      I'm ${age} years old. 
+      I want to be ${ambition} of ${location}. 
+      I live in ${location}.
+      what should I do to achive my goal In my country. `,
       temperature: 0.6,
+      max_tokens: 250
     });
+    console.log("AI : ", completion.data.choices[0].text)
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
       res.status(500).json({
