@@ -1,4 +1,5 @@
 import Layout from '@/components/layout'
+import LoadingDots from '@/components/ui/LoadingDots';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 
@@ -8,6 +9,7 @@ import React, { useEffect, useState } from 'react'
 const UserDetails = () => {
 
     const [isChecked, setIsChecked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
@@ -33,6 +35,7 @@ const UserDetails = () => {
 
         if (isChecked) {
             console.log('checked')
+            setIsLoading(true);
 
 
             try {
@@ -60,8 +63,8 @@ const UserDetails = () => {
                 }
                 setAiMessage(data.result)
                 console.log(aiMessage.toString())
-                
 
+                setIsLoading(false);
                 router.push('/botResponse');
 
             } catch (error) {
@@ -79,7 +82,7 @@ const UserDetails = () => {
         if (aiMessage) {
             localStorage.setItem('aiMessage', aiMessage);
         }
-      }, [aiMessage]);
+    }, [aiMessage]);
 
     return (
         <>
@@ -95,10 +98,10 @@ const UserDetails = () => {
                                             <div className="d-flex flex-column justify-content-center align-items-center text-center mt-5 pt-5 transparent-select-box">
                                                 <h2 className="text-white font-36">ENTER YOUR DETAILS</h2>
                                                 <form className=" col-12   px-2 px-lg-5 mt-2 mb-5 d-flex flex-column justify-content-center align-items-center">
-                                                    <input type="text" placeholder="Your Name" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setName(e.target.value)} />
-                                                    <input type="text" placeholder="Your Age" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setAge(e.target.value)} />
-                                                    <input type="text" placeholder="Your Gender" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setGender(e.target.value)} />
-                                                    <select className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setCountry(e.target.value)}>
+                                                    <input type="text" required placeholder="Your Name" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setName(e.target.value)} />
+                                                    <input type="text" required placeholder="Your Age" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setAge(e.target.value)} />
+                                                    <input type="text" required placeholder="Your Gender" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setGender(e.target.value)} />
+                                                    <select className="mb-2 py-3 px-3 w-100 transparent-input" required onChange={(e) => setCountry(e.target.value)}>
                                                         <option value="">Select your country</option>
                                                         <option value="United States">United States</option>
                                                         <option value="Canada">Canada</option>
@@ -112,7 +115,7 @@ const UserDetails = () => {
                                                     </select>
 
                                                     <input type="text" placeholder="Your Interests" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setInterests(e.target.value)} />
-                                                    <select className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setAmbition(e.target.value)}>
+                                                    <select className="mb-2 py-3 px-3 w-100 transparent-input" required onChange={(e) => setAmbition(e.target.value)}>
                                                         <option value="">Select your Ambition</option>
                                                         <option value="Doctor">Doctor</option>
                                                         <option value="Software Engineer">Software Engineer</option>
@@ -132,7 +135,14 @@ const UserDetails = () => {
                                                         <p>I agree to the terms and conditions</p>
                                                     </label>
 
-                                                    <button className="submit-btn my-3 px-3" onClick={handleSubmit}>NEXT</button>
+                                                    <button className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3" onClick={handleSubmit}>
+                                                        {isLoading ? (
+                                                                <LoadingDots color="#fff" />
+                                                        ) : (
+                                                            <p className='mb-0'>NEXT</p>
+                                                        )}
+                                                        
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
