@@ -33,48 +33,54 @@ const UserDetails = () => {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
-        if (isChecked) {
-            console.log('checked')
-            setIsLoading(true);
+        // if(!name && !age && !gender && !country && !ambition ){
 
-
-            try {
-                const response = await fetch("/api/generate", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(
-                        {
-                            name: name,
-                            age: age,
-                            gender: gender,
-                            location: country,
-                            interests: interests,
-                            ambition: ambition,
-                            education: education
-                        }
-                    ),
-                });
-
-                const data = await response.json();
-                if (response.status !== 200) {
-                    throw data.error || new Error(`Request failed with status ${response.status}`);
+            if (isChecked) {
+                console.log('checked')
+                setIsLoading(true);
+    
+    
+                try {
+                    const response = await fetch("/api/generate", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(
+                            {
+                                name: name,
+                                age: age,
+                                gender: gender,
+                                location: country,
+                                interests: interests,
+                                ambition: ambition,
+                                education: education
+                            }
+                        ),
+                    });
+    
+                    const data = await response.json();
+                    if (response.status !== 200) {
+                        throw data.error || new Error(`Request failed with status ${response.status}`);
+                    }
+                    setAiMessage(data.result)
+                    console.log(aiMessage.toString())
+    
+                    setIsLoading(false);
+                    router.push('/botResponse');
+    
+                } catch (error) {
+                    console.error(error);
                 }
-                setAiMessage(data.result)
-                console.log(aiMessage.toString())
-
-                setIsLoading(false);
-                router.push('/botResponse');
-
-            } catch (error) {
-                console.error(error);
+    
+    
+            } else {
+                console.log('not checked')
             }
-
-
-        } else {
-            console.log('not checked')
-        }
+        // }else{
+        //     alert('Please fill all the fields..')
+        // }
+        
     };
 
 
@@ -114,7 +120,7 @@ const UserDetails = () => {
                                                         <option value="China">China</option>
                                                     </select>
 
-                                                    <input type="text" placeholder="Your Interests" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setInterests(e.target.value)} />
+                                                    {/* <input type="text" placeholder="Your Interests" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setInterests(e.target.value)} /> */}
                                                     <select className="mb-2 py-3 px-3 w-100 transparent-input" required onChange={(e) => setAmbition(e.target.value)}>
                                                         <option value="">Select your Ambition</option>
                                                         <option value="Doctor">Doctor</option>
@@ -123,7 +129,7 @@ const UserDetails = () => {
                                                         <option value="Teacher">Teacher</option>
                                                     </select>
 
-                                                    <input type="text" placeholder="Your Education Background" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setEducation(e.target.value)} />
+                                                    {/* <input type="text" placeholder="Your Education Background" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setEducation(e.target.value)} /> */}
 
                                                     <label className='d-flex flex-row text-white text-start px-3 mt-2'>
                                                         <input
