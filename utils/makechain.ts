@@ -16,11 +16,25 @@ Chat History:
 Follow Up Input: {question}
 Standalone question:`);
 
-const QA_PROMPT = PromptTemplate.fromTemplate(
-  `You are an AI assistant providing helpful advice. You are given the following extracted parts of a long document and a question. Provide a conversational answer based on the context provided.
-  You should only use hyperlinks as references that are explicitly listed as a source in the context below. Do NOT make up a hyperlink that is not listed below.
 
-  If you can't find the answer in the context below, just say "Hmm, I'm not sure." Don't try to make up an answer.
+// `You are an Recruiter finding suitable candidate. You are given the following extracted data of a long document and a question. Provide the conversational answer with names of candidates based on the context provided.
+
+//   If you can't find suitable candidates in the context below, just say "Sorry, no match found.." Don't try to make up an answer.
+//   If the question is not related to the context provided, politely inform them that you are tuned to only answer questions that are related to DFCC bank.
+
+// Question: {question}
+// =========
+// {context}
+// =========
+// Answer in Markdown:`
+
+//  Do not make up any other answer. Do not add additional punctuation marks.
+const QA_PROMPT = PromptTemplate.fromTemplate(
+  `You are an Recruiter finding suitable candidate. You are given the following extracted data of a long document and a question. Provide only cv of candidates as a array only separated by comma based on the context provided.
+
+  Follow this example array: "[Sachini's resume-3, Amanda-CV, cv-test-doc]"  
+
+  If you can't find suitable candidates in the context below, just say "Sorry, no match found.." Don't try to make up an answer.
   If the question is not related to the context provided, politely inform them that you are tuned to only answer questions that are related to DFCC bank.
 
 Question: {question}
@@ -61,8 +75,7 @@ export const makeChain = (
     vectorstore,
     combineDocumentsChain: docChain,
     questionGeneratorChain: questionGenerator,
-    returnSourceDocuments: true,
-    k: 2, //number of source documents to return
+    returnSourceDocuments: true, //number of source documents to return
   });
 
   return chatVectorDBQAChain

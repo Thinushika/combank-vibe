@@ -36,7 +36,7 @@ export default async function handler(
   });
 
   const sendData = (data: string) => {
-    res.write(`data: ${data}\n\n`);
+    // res.write(`data: ${data}\n\n`);
   };
 
   sendData(JSON.stringify({ data: '' }));

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { FiMenu } from "react-icons/fi";
 
 const Navbar = () => {
   return (
@@ -14,9 +15,10 @@ const Navbar = () => {
             <a className="navbar-brand m-0 p-0" href="./index.html">
               <Image src="/vibelogo.png" alt="logo"  className='header-logo-1' width={100} height={40} />
             </a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="bi bi-list toggle-icon-styles" style={{color: "#fff !important"}}></span>
+            <button className="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style={{border: "none !important"}}>
+              {/* <span className="bi bi-list toggle-icon-styles text-white" style={{color: "#fff !important"}}></span> */}
+              <FiMenu style={{color: "#fff !important"}} />
             </button>
 
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">

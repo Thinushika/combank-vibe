@@ -25,6 +25,7 @@
     "bootstrap": "^5.2.3",
     "cheerio": "^1.0.0-rc.12",
     "clsx": "^1.2.1",
+    "d3-dsv": "^3.0.1",
     "dom-parser": "^0.1.6",
     "dotenv": "^16.0.3",
     "jquery": "^3.6.4",
@@ -39,6 +40,7 @@
     "react-icons": "^4.8.0",
     "react-loading-icons": "^1.1.0",
     "react-markdown": "^8.0.5",
+    "react-pdf": "^6.2.2",
     "react-router-dom": "^6.11.1",
     "swiper": "^9.3.1"
   },

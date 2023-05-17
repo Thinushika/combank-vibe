@@ -9,7 +9,7 @@ const ChooseOption = () => {
     const handleSelect = () => {
         if(selected === 'generateImage'){
             console.log('generateImage')
-            location.href='/userDetails'
+            location.href='/imageGenerate'
         }
         else if(selected === 'seeFuture'){
             console.log("seeFuture")
