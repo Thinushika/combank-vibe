@@ -26,7 +26,7 @@ export default async function(req: { body: { userPrompt: string; }; }, res: any)
             'Content-Type': 'application/json'
           },
         body: JSON.stringify({ 
-            "msg": "an amazing cat with white fur walking in the forests"
+            "msg": userPrompt
          }),
     });
 
