@@ -2,13 +2,13 @@ import Layout from '@/components/layout'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import LoadingDots from '@/components/ui/LoadingDots';
-import { Agent } from 'http';
+
 
 const ImageGenerate = () => {
     
     const [isLoading, setIsLoading] = useState(false);
     
-    const [userImage, setUserImage] = useState('');
+    const [userImage, setUserImage] = useState('/me.jpg');
     const [userAge, setUserAge] = useState('');
     const [position, setPosition] = useState('');
     const [country, setCountry] = useState('');
@@ -22,67 +22,94 @@ const ImageGenerate = () => {
 // image- age-ambition-nationality
     useEffect(() => {
         setUserPrompt(`after 5 years as a ${country} ${position} `)
-    }, [userPrompt, imageUrl, imageId, position, country, userAge])
+        // setUserImage('https://drive.google.com/file/d/18H8G04u2BjLeOs2PtzTiYQJvgyLq32l-/view?usp=share_link')
+    }, [userPrompt, imageUrl, userImage, imageId, position, country, userAge])
 
+    const handleImageUpload = async (e) => {
+        // const file = e.target.files[0];
+    
+        // console.log("file : ", file)
+        // // Create a new FormData object
+        // const formData = new FormData();
+        // formData.append('image', file);
+    
+        // try {
+        //   // Make a POST request to the API route
+        //   const response = await fetch('/api/uploadImage', {
+        //     method: 'POST',
+        //     body: formData,
+        //   });
+    
+        //   if (response.ok) {
+        //     const { imageUrl } = await response.json();
+        //     setUserImage(imageUrl);
+        //     console.log('image url handle : ', userImage)
+        //   } else {
+        //     console.error('Upload failed');
+        //   }
+        // } catch (error) {
+        //   console.error(error);
+        // }
+      };
 
     const handleGenerate = async () => {
-        console.log('prompt : ',userPrompt)
-        console.log('image : ',userImage)
-        // try {
-        //     setIsLoading(true);
-        //     console.log('prompt : ', userPrompt)
-        //     const response = await fetch('https://api.thenextleg.io/v2/imagine', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({
-        //             "msg": userPrompt
-        //         }),
-        //     });
+        try {
+            setIsLoading(true);
+            console.log('image : ',userImage)
+            console.log('prompt : ', userPrompt)
+            let urlPrompt = `${userImage} ${userPrompt}` 
+            console.log("urlPrompt : ", urlPrompt)
+            const response = await fetch('https://api.thenextleg.io/v2/imagine', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "msg": urlPrompt
+                }),
+            });
 
-        //     if (response.status !== 200) {
-        //         const error = await response.json();
-        //         throw new Error(error.message);
-        //     }
+            if (response.status !== 200) {
+                const error = await response.json();
+                throw new Error(error.message);
+            }
 
-        //     const data = await response.json();
-        //     console.log("imagine : ", data)
-        //     setImageId(data.messageId);
-
-
-        //     if(imageId){
-        //         // get image
-        //     setTimeout(async () => {
-        //         const responseImage = await fetch('https://api.thenextleg.io/v2/message/PdYYjSxFhlEzmJBYlwdu', {
-        //         method: 'GET',
-        //         headers: {
-        //             'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
-        //             'Content-Type': 'application/json'
-        //         }
-        //     });
-
-        //     if (responseImage.status !== 200) {
-        //         const error = await responseImage.json();
-        //         throw new Error(error.message);
-        //     }
-
-        //     const imageData = await responseImage.json();
-        //     console.log("image url : ", imageData.response.imageUrl);
-        //     setImageUrl(imageData.response.imageUrl)
-        //     }, 8000);
-
-        //     }
+            const data = await response.json();
+            console.log("imagine : ", data)
+            setImageId(data.messageId);
 
 
-        //     setIsLoading(false);
-        // } catch (error) {
-        //     console.log(error)
-        // }
-        // finally {
-        //     setUserPrompt('')
-        // }
+            if(imageId){
+            setTimeout(async () => {
+                const responseImage = await fetch(`https://api.thenextleg.io/v2/message/${imageId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (responseImage.status !== 200) {
+                const error = await responseImage.json();
+                throw new Error(error.message);
+            }
+
+            const imageData = await responseImage.json();
+            console.log("image url : ", imageData.response.imageUrl);
+            setImageUrl(imageData.response.imageUrl)
+            }, 12000);
+
+            }
+
+
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error)
+        }
+        finally {
+            // setUserPrompt('')
+        }
     }
 
     return (
@@ -102,7 +129,10 @@ const ImageGenerate = () => {
                                                 <p className="text-white font-18 mb-5">
                                                     Describe Who you want to be
                                                 </p>
-                                                <input type="file" name="image" id="user_image" placeholder='Upload your photo here' className='mb-2 py-3 px-3 w-100 transparent-input' onChange={(e) => { setUserImage(e.target.value) }} />
+                                                <input type="file" name="image" id="user_image" placeholder='Upload your photo here' className='mb-2 py-3 px-3 w-100 transparent-input' onChange={handleImageUpload} />
+                                                <div className="d-flex w-50">
+                                                {userImage && <Image src={userImage} alt="User's uploaded image" width={300} height={400} className='px-5' />}
+                                                </div>
                                                 <input type="text" name="prompt" id="user_prompt" placeholder='Enter your age' className='mb-2 py-3 px-3 w-100 transparent-input' value={userAge} onChange={(e) => { setUserAge(e.target.value) }} />
                                                 <select className="mb-2 py-3 px-3 w-100 transparent-input" required onChange={(e) => setCountry(e.target.value)}>
                                                         <option value="">Select your country</option>
