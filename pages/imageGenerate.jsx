@@ -19,7 +19,7 @@ const ImageGenerate = () => {
         try {
             setIsLoading(true);
             console.log('prompt : ', userPrompt)
-            const response = await fetch('https://api.thenextleg.io/v2/imagine', {
+            const response = await fetch('/api/generateImage', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

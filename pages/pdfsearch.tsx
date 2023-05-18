@@ -14,7 +14,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import Link from 'next/link';
 
 const PdfSearch = () => {
 
@@ -30,7 +29,7 @@ const PdfSearch = () => {
   }>({
     messages: [
       {
-        message: 'Hi, what would you like to find about candidates?',
+        message: 'Hi, what would you like to learn about DFCC Bank?',
         type: 'apiMessage',
       },
     ],
@@ -67,12 +66,9 @@ const PdfSearch = () => {
   const apiMessageArray = apiMessageFinal.includes("Sorry, no match found") ?
     console.log("sorry")
     :
-    apiMessageFinal.replace('"', '').replace('"', '').replace('[', '').replace(']', '').split(',');
+    apiMessageFinal.split(',');
 
-
-
-  // const apiMessageArray = apiMessageFinal.replace('"', '').replace('"', '').replace('[', '').replace(']', '').split(',');
-
+  console.log(apiMessageArray);
   console.log(apiMessageFinal);
 
 
@@ -119,8 +115,7 @@ const PdfSearch = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          question,
-          history,
+          question
         }),
         signal: ctrl.signal,
         onmessage: (event) => {
@@ -253,30 +248,32 @@ const PdfSearch = () => {
                             {message.message}
                           </ReactMarkdown>
                           {apiMessageArray ? (
-                          <div className={`${display}`}>
-                            {apiMessageArray.map((item, index) => (
-                              <div className='d-flex justify-content-center align-items-center m-2 rounded text-center' style={{ width: 'max-content', height: 'max-content', backgroundColor: "#34F65F" }} key={index}>
-                                <Link href={`/cv/${item}.pdf`} target="_blank" >
-                                  <Image src={`/${item}.png`} alt='' width={75} height={100} />
-                                </Link>
-                                {/* <p className='mb-0 p-1' style={{fontWeight:"bold"}}>{item}</p> */}
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className="d-flex">
-                            {/* {apiMessageFinal.map((item, index) => (
+                            <div className={`${display}`}>
+                              {apiMessageArray.map((item, index) => {
+                                
+                                return (
+                                  (
+                                    <div className='d-flex justify-content-center align-items-center m-2 rounded text-center' style={{ width: 'max-content', height: 'max-content', backgroundColor: "#34F65F" }} key={index}>
+                                      <p className='mb-0 p-1' style={{ fontWeight: "bold" }}>{message.message}</p>
+                                    </div>
+                                  )
+                                )
+                              })}
+                            </div>
+                          ) : (
+                            <div className="d-flex">
+                              {/* {apiMessageArray.map((item, index) => (
                               <div className='d-flex justify-content-center align-items-center m-2 rounded text-center' style={{ width: 'max-content', height: 'max-content', backgroundColor: "#34F65F" }} key={index}>
                                 <p className='mb-0 p-1' style={{ fontWeight: "bold" }}>{item}</p>
                               </div>
                             ))} */}
-                          </div>
-                        )}
+                            </div>
+                          )}
                         </div>
                       </div>
                       {/* <ul> */}
                       <div className="d-flex flex-row">
-                        
+
 
                       </div>
 
