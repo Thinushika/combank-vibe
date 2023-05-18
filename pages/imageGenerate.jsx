@@ -19,7 +19,7 @@ const ImageGenerate = () => {
         try {
             setIsLoading(true);
             console.log('prompt : ', userPrompt)
-            const response = await fetch('/api/generateImage', {
+            const response = await fetch('/api/webhook/generateImage', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
