@@ -8,7 +8,7 @@ const ImageGenerate = () => {
     
     const [isLoading, setIsLoading] = useState(false);
     
-    const [userImage, setUserImage] = useState('/me.jpg');
+    const [userImage, setUserImage] = useState('');
     const [userAge, setUserAge] = useState('');
     const [position, setPosition] = useState('');
     const [country, setCountry] = useState('');
@@ -52,7 +52,7 @@ const ImageGenerate = () => {
         // }
       };
 
-    const handleGenerate = async () => {
+      const handleGenerate = async () => {
         try {
             setIsLoading(true);
             console.log('image : ',userImage)
