@@ -35,29 +35,29 @@ export default async function (req: { body: { userPrompt: string; }; }, res: any
     }, [imageId])
 
 
-    const response = await fetch('https://api.thenextleg.io/v2/imagine', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${process.env.NEXT_LEG}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "msg": userPrompt
-        }),
-    });
+    // const response = await fetch('https://api.thenextleg.io/v2/imagine', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Authorization': `Bearer ${process.env.NEXT_LEG}`,
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         "msg": userPrompt
+    //     }),
+    // });
 
-    if (response.status !== 200) {
-        const error = await response.json();
-        throw new Error(error.message);
-    }
+    // if (response.status !== 200) {
+    //     const error = await response.json();
+    //     throw new Error(error.message);
+    // }
 
-    const data = await response.json();
-    console.log("imagine : ", data)
-    setImageId(data.messageId);
+    // const data = await response.json();
+    // console.log("imagine : ", data)
+    // setImageId(data.messageId);
 
-    if (imageId) {
-        setTimeout(async () => {
-            const responseImage = await fetch(`https://api.thenextleg.io/v2/seed/${imageId}`, {
+    // if (imageId) {
+    //     setTimeout(async () => {
+            const responseImage = await fetch('https://api.thenextleg.io/v2/message/PdYYjSxFhlEzmJBYlwdu', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${process.env.NEXT_LEG}`,
@@ -72,9 +72,9 @@ export default async function (req: { body: { userPrompt: string; }; }, res: any
 
             const imageData = await responseImage.json();
             console.log("image url : ",imageData.imageUrl);
-        }, 8000);
-    } else {
-        console.log('image id is null')
-    }
+    //     }, 8000);
+    // } else {
+    //     console.log('image id is null')
+    // }
 
 }

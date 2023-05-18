@@ -6,9 +6,9 @@ const nextConfig = {
   //   config.experiments = { ...config.experiments, topLevelAwait: true };
   //   return config;
   // },
-  // images: {
-  //   domains: ['localhost']
-  // }
+  images: {
+    domains: ['localhost','cdn.discordapp.com']
+  }
   
 };
 
