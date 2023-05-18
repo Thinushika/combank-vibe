@@ -2,16 +2,24 @@ import React from 'react'
 
 
 // {
-//     "success": true,
-//     "messageId": "your-message-id",
-//     "createdAt": "2023-04-04T13:07:01.927Z"
-//   }
-
-//   {
-//     "createdAt": "2023-04-04T13:05:01.927Z",
-//     "content": "Your now in relax mode",
+//     "progress": 100,
+//     "createdAt": "2023-04-04T13:07:01.927Z",
+//     "buttons": [
+//         "U1",
+//         "U2",
+//         "U3",
+//         "U4",
+//         "🔄",
+//         "V1",
+//         "V2",
+//         "V3",
+//         "V4"
+//     ],
+//     "imageUrl": "your-image-url",
+//     "buttonMessageId": "OtfxNzfMIKBPVE1aP4u4",
+//     "originatingMessageId": "your-message-id",
+//     "content": "your-original-prompt",
 //     "ref": "",
-//     "type": "relax",
 //     "responseAt": "2023-04-04T13:06:01.927Z"
 // }
 
