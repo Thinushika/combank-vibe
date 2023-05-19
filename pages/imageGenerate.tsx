@@ -73,7 +73,7 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
             const response = await fetch('https://api.thenextleg.io/v2/imagine', {
                 method: 'POST',
                 headers: {
-                    'Authorization': apiKey,
+                    'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -107,7 +107,7 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
             const responseImage = await fetch(`https://api.thenextleg.io/v2/message/${imageId}`, {
               method: 'GET',
               headers: {
-                'Authorization': apiKey,
+                'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
                 'Content-Type': 'application/json'
               }
             });
