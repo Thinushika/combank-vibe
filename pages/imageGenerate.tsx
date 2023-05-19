@@ -101,6 +101,7 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
     // check image generated every 5 seconds
     useEffect(() => {
 
+        console.log("image id : ",imageId)
         
         let timerId: string | number | NodeJS.Timer | undefined;
         const handleImageUrl = async () => {
