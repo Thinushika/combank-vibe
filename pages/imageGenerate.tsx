@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 
 interface Props {
-    dirs: string [];
+    dirs: string[];
 }
 
 const ImageGenerate: NextPage<Props> = ({ dirs }) => {
@@ -32,16 +32,13 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
     const [selectedFile, setSelectedFile] = useState<File>();
 
     const [savedImageUrl, setSavedImageUrl] = useState('')
-    // const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
+
+    const [uploadState, setUploadState] = useState(false)
+    const [uploadedImageUrl, setUploadedImageUrl] = useState('')
 
 
-    useEffect(() => {
-        setUserPrompt(`after 5 years as a ${country} ${gender} ${position} `);
-        setSavedImageUrl("https://combank-vibe.vercel.app/images/" + dirs[0])
-    }, [userPrompt, imageUrl, userImage, imageId, position, country, userAge])
 
-    console.log(" : " , savedImageUrl)
-
+    // handle image upload
     const handleUpload = async () => {
         setUploading(true)
         try {
@@ -56,14 +53,22 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
         setUploading(false)
     }
 
+    // set variables
+    useEffect(() => {
+        setUserPrompt(`after 5 years as a ${country} ${gender} ${position} `);
+        setSavedImageUrl("https://combank-vibe.vercel.app/images/" + dirs[dirs.length - 1])
+        console.log("savedImageUrl : ",savedImageUrl)
+    }, [userPrompt, imageUrl, userImage, imageId, position, uploadedImageUrl, country, userAge, dirs])
 
+
+    // generate image main function - getting message id
     const handleGenerate = async () => {
         try {
             setIsLoading(true);
-            console.log('image : ', userImage)
-            console.log('prompt : ', userPrompt)
+            // console.log('image : ', userImage)
+            // console.log('prompt : ', userPrompt)
             let urlPrompt = `${savedImageUrl} ${userPrompt}`
-            console.log("urlPrompt : ", urlPrompt)
+            // console.log("urlPrompt : ", urlPrompt)
             const response = await fetch('https://api.thenextleg.io/v2/imagine', {
                 method: 'POST',
                 headers: {
@@ -83,10 +88,20 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
             const data = await response.json();
             console.log("imagine : ", data)
             setImageId(data.messageId);
+            setUploadState(true)
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
-            if (imageId) {
-                setTimeout(async () => {
+
+    // check image generated every 5 seconds
+    useEffect(() => {
+        if (uploadState === true) {
+            setTimeout(() => {
+                const handleImageUrl = async () => {
                     const responseImage = await fetch(`https://api.thenextleg.io/v2/message/${imageId}`, {
                         method: 'GET',
                         headers: {
@@ -103,19 +118,16 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
                     const imageData = await responseImage.json();
                     console.log("image url : ", imageData.response.imageUrl);
                     setImageUrl(imageData.response.imageUrl)
-                }, 12000);
-
-            }
-
-
-            setIsLoading(false);
-        } catch (error) {
-            console.log(error)
+                }
+                handleImageUrl()
+            }, 5000);
         }
-        finally {
-            // setUserPrompt('')
-        }
-    }
+    }, [imageId])
+
+
+
+
+
 
     return (
         <>
@@ -164,11 +176,12 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
                                                 </button>
 
                                                 <div className="mt-20 d-flex flex-column py-3">
-                                                    {dirs.map((item) => (
+                                                    {/* {dirs.map((item) => (
                                                         <Link key={item} href={"/images/" + item}>
                                                             {item}
                                                         </Link>
-                                                     ))}
+                                                     ))} */}
+                                                    <Link href={savedImageUrl}>{savedImageUrl}</Link>
                                                 </div>
 
                                                 <input type="text" name="prompt" id="user_prompt" placeholder='Enter your age' className='mb-2 py-3 px-3 w-100 transparent-input' value={userAge} onChange={(e) => { setUserAge(e.target.value) }} />
@@ -192,12 +205,7 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
                                                     <option value="Lawyer">Lawyer</option>
                                                     <option value="Teacher">Teacher</option>
                                                 </select>
-                                                {/* <button type="submit" onClick={handleGenerate} className="my-3" style={{
-                                                    backgroundColor: "#ee3035", color: "#fff", fontWeight: "bold", height: "50px"
-                                                }}
-                                                >
-                                                    GENERATE
-                                                </button> */}
+
                                                 <button className="submit-btn text-center d-flex justify-content-center align-items-center my-3 px-3" onClick={handleGenerate}>
                                                     {isLoading ? (
                                                         <LoadingDots color="#fff" />
