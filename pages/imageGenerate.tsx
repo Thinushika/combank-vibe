@@ -37,6 +37,7 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
     const [uploadedImageUrl, setUploadedImageUrl] = useState('')
 
 
+    const apiKey = `Bearer ${process.env.NEXT_LEG}`
 
     // handle image upload
     const handleUpload = async () => {
@@ -72,7 +73,7 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
             const response = await fetch('https://api.thenextleg.io/v2/imagine', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${process.env.NEXT_LEG}`,
+                    'Authorization': apiKey,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -100,12 +101,13 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
     // check image generated every 5 seconds
     useEffect(() => {
 
+        
         let timerId: string | number | NodeJS.Timer | undefined;
         const handleImageUrl = async () => {
             const responseImage = await fetch(`https://api.thenextleg.io/v2/message/${imageId}`, {
               method: 'GET',
               headers: {
-                'Authorization': `Bearer ${process.env.NEXT_LEG}`,
+                'Authorization': apiKey,
                 'Content-Type': 'application/json'
               }
             });
