@@ -103,60 +103,60 @@ const ImageGenerate: NextPage<Props> = ({ dirs }) => {
 
         console.log("image id : ",imageId)
         
-        let timerId: string | number | NodeJS.Timer | undefined;
-        const handleImageUrl = async () => {
-            const responseImage = await fetch(`https://api.thenextleg.io/v2/message/${imageId}`, {
-              method: 'GET',
-              headers: {
-                'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
-                'Content-Type': 'application/json'
-              }
-            });
+        // let timerId: string | number | NodeJS.Timer | undefined;
+        // const handleImageUrl = async () => {
+        //     const responseImage = await fetch(`https://api.thenextleg.io/v2/message/${imageId}`, {
+        //       method: 'GET',
+        //       headers: {
+        //         'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
+        //         'Content-Type': 'application/json'
+        //       }
+        //     });
       
-            if (responseImage.status !== 200) {
-              const error = await responseImage.json();
-              throw new Error(error.message);
-            }
+        //     if (responseImage.status !== 200) {
+        //       const error = await responseImage.json();
+        //       throw new Error(error.message);
+        //     }
       
-            const imageData = await responseImage.json();
-            console.log("image url:", imageData.response.imageUrl);
-            setImageUrl(imageData.response.imageUrl);
-            setUploadState(false); // Stop further requests once response is received
-          };
+        //     const imageData = await responseImage.json();
+        //     console.log("image url:", imageData.response.imageUrl);
+        //     setImageUrl(imageData.response.imageUrl);
+        //     setUploadState(false); // Stop further requests once response is received
+        //   };
       
-          if (uploadState && imageId) {
-            timerId = setInterval(() => {
-              handleImageUrl();
-            }, 5000);
-          }
+        //   if (uploadState && imageId) {
+        //     timerId = setInterval(() => {
+        //       handleImageUrl();
+        //     }, 5000);
+        //   }
       
-          return () => {
-            clearInterval(timerId); // Clear the interval when the component unmounts or when dependencies change
-          };
+        //   return () => {
+        //     clearInterval(timerId); // Clear the interval when the component unmounts or when dependencies change
+        //   };
        
 
         // if (uploadState === true) {
-        //     setTimeout(() => {
-        //         const handleImageUrl = async () => {
-        //             const responseImage = await fetch(`https://api.thenextleg.io/v2/message/${imageId}`, {
-        //                 method: 'GET',
-        //                 headers: {
-        //                     'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
-        //                     'Content-Type': 'application/json'
-        //                 }
-        //             });
+            setTimeout(() => {
+                const handleImageUrl = async () => {
+                    const responseImage = await fetch(`https://api.thenextleg.io/v2/message/${imageId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer 9b59b06c-6616-4bce-8eeb-e47f9e4ff57c',
+                            'Content-Type': 'application/json'
+                        }
+                    });
 
-        //             if (responseImage.status !== 200) {
-        //                 const error = await responseImage.json();
-        //                 throw new Error(error.message);
-        //             }
+                    if (responseImage.status !== 200) {
+                        const error = await responseImage.json();
+                        throw new Error(error.message);
+                    }
 
-        //             const imageData = await responseImage.json();
-        //             console.log("image url : ", imageData.response.imageUrl);
-        //             setImageUrl(imageData.response.imageUrl)
-        //         }
-        //         handleImageUrl()
-        //     }, 5000);
+                    const imageData = await responseImage.json();
+                    console.log("image url : ", imageData.response.imageUrl);
+                    setImageUrl(imageData.response.imageUrl)
+                }
+                handleImageUrl()
+            }, 5000);
         // }
     }, [uploadState, imageId])
 
