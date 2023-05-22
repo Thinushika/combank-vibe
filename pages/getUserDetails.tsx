@@ -84,47 +84,47 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                     },
                     body: JSON.stringify(
                         {
-                            name: name,
-                            age: age,
-                            gender: gender,
-                            location: country,
-                            ambition: ambition,
-                            email: email,
-                            phoneNo: phoneNo,
-                            savedImageUrl: savedImageUrl,
+                            name: "name",
+                            age: "age",
+                            gender: "gender",
+                            location: "country",
+                            ambition: "ambition",
+                            email: "email",
+                            phoneNo: "phoneNo",
+                            savedImageUrl: "savedImageUrl",
                         }
                     ),
                 });
 
-                const data = await response.json();
+                const dataBackend = await response.json();
                 if (response.status !== 200) {
-                    throw data.error || new Error(`Request failed with status ${response.status}`);
+                    throw dataBackend.error || new Error(`Request failed with status ${response.status}`);
                 }
-
+                setResId(dataBackend.id)
                 console.log(aiMessage.toString())
 
 
-                // const response = await fetch("/api/generate", {
-                //     method: "POST",
-                //     headers: {
-                //         "Content-Type": "application/json",
-                //     },
-                //     body: JSON.stringify(
-                //         {
-                //             name: name,
-                //             age: age,
-                //             location: country,
-                //             ambition: ambition,
-                //         }
-                //     ),
-                // });
+                const responseOpenAi = await fetch("/api/generate", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(
+                        {
+                            name: name,
+                            age: age,
+                            location: country,
+                            ambition: ambition,
+                        }
+                    ),
+                });
 
-                // const data = await response.json();
-                // if (response.status !== 200) {
-                //     throw data.error || new Error(`Request failed with status ${response.status}`);
-                // }
-                // setAiMessage(data.result)
-                // console.log(aiMessage.toString())
+                const data = await responseOpenAi.json();
+                if (responseOpenAi.status !== 200) {
+                    throw data.error || new Error(`Request failed with status ${responseOpenAi.status}`);
+                }
+                setAiMessage(data.result)
+                console.log(aiMessage.toString())
 
                 setIsLoading(false);
                 router.push('/success');
