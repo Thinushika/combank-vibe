@@ -87,7 +87,7 @@ export default function Home() {
               spaceBetween: 0,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 4,
               spaceBetween: 0,
             },
             1336: {
