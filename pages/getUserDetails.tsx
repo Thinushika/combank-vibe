@@ -84,14 +84,14 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                     },
                     body: JSON.stringify(
                         {
-                            name: "name",
-                            age: "age",
-                            gender: "gender",
-                            location: "country",
-                            ambition: "ambition",
-                            email: "email",
-                            phoneNo: "phoneNo",
-                            savedImageUrl: "savedImageUrl",
+                            name: "thinu",
+                            age: "26",
+                            gender: "female",
+                            location: "Sri Lanka",
+                            ambition: "Doctor",
+                            email: "thinu@gmail.com",
+                            phoneNo: "0123456789",
+                            savedImageUrl: "https://combank-vibe.vercel.app/images/1684490539265_happy-black-teen-boy-outside-african-american-smiles-sitting-bench-192130399.jpg",
                         }
                     ),
                 });
