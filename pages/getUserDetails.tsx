@@ -129,13 +129,6 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                 console.log(aiMessage.toString())
 
 
-                // try {
-                
-                // } catch (error) {
-                //     console.log(error)
-                // }
-
-
 
                 setIsLoading(false);
                 router.push('/success');
