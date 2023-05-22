@@ -71,7 +71,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
             setIsLoading(true);
             if (dirs.length > 0) {
                 const latestDir = dirs[dirs.length - 1]; 
-                setSavedImageUrl(`https://localhost:3000/images/${latestDir}`);
+                setSavedImageUrl(`https://combank-vibe.vercel.app/images/${latestDir}`);
                 console.log('savedImageUrl:', savedImageUrl);
               }
 
