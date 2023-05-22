@@ -104,7 +104,10 @@ button {
 .b-space {
   padding-bottom: var(--space-vertical) !important;
 }
-
+#upload-input{
+  width: 200px !important;
+  align-self: center !important;
+}
 .background_home {
   background-image: url("/home_bg.png");
   background-position: top left;

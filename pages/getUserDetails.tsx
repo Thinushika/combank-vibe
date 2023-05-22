@@ -236,7 +236,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                                         <option value="Teacher">Teacher</option>
                                                     </select>
 
-                                                    <label htmlFor="upload-input" className="hidden-file-input">
+                                                    <label htmlFor="upload-input" className="hidden-file-input d-flex justify-content-center">
                                                         <input
                                                             type="file"
                                                             id="upload-input"
