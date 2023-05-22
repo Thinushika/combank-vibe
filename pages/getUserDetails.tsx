@@ -104,27 +104,27 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                 console.log("respons backend : ", dataBackend)
 
                 // chat gpt generate
-                const responseOpenAi = await fetch("/api/generate", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(
-                        {
-                            name: name,
-                            age: age,
-                            location: country,
-                            ambition: ambition,
-                        }
-                    ),
-                });
+                // const responseOpenAi = await fetch("/api/generate", {
+                //     method: "POST",
+                //     headers: {
+                //         "Content-Type": "application/json",
+                //     },
+                //     body: JSON.stringify(
+                //         {
+                //             name: name,
+                //             age: age,
+                //             location: country,
+                //             ambition: ambition,
+                //         }
+                //     ),
+                // });
 
-                const data = await responseOpenAi.json();
-                if (responseOpenAi.status !== 200) {
-                    throw data.error || new Error(`Request failed with status ${responseOpenAi.status}`);
-                }
-                setAiMessage(data.result)
-                console.log(aiMessage.toString())
+                // const data = await responseOpenAi.json();
+                // if (responseOpenAi.status !== 200) {
+                //     throw data.error || new Error(`Request failed with status ${responseOpenAi.status}`);
+                // }
+                // setAiMessage(data.result)
+                // console.log(aiMessage.toString())
 
                 setIsLoading(false);
                 router.push('/success');
