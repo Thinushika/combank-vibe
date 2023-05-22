@@ -38,7 +38,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
         //     setSavedImageUrl(`https://localhost:3000/images/${latestDir}`);
         //     console.log('savedImageUrl:', savedImageUrl);
         //   }
-    }, [dirs])
+    }, [dirs, name, age, gender, country, ambition, email, phoneNo, aiMessage, resId, savedImageUrl])
 
 
     // handle image upload
@@ -70,13 +70,13 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
             console.log('checked')
             setIsLoading(true);
             if (dirs.length > 0) {
-                const latestDir = dirs[dirs.length - 1]; 
+                const latestDir = dirs[dirs.length - 1];
                 setSavedImageUrl(`https://combank-vibe.vercel.app/images/${latestDir}`);
                 console.log('savedImageUrl:', savedImageUrl);
-              }
+            }
 
             try {
-
+                // data to backend
                 const response = await fetch("https://it-marketing.website/vibe-backend/api/save-customer-data", {
                     method: "POST",
                     headers: {
@@ -84,14 +84,14 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                     },
                     body: JSON.stringify(
                         {
-                            name: "thinu",
-                            age: "26",
-                            gender: "female",
-                            location: "Sri Lanka",
-                            ambition: "Doctor",
-                            email: "thinu@gmail.com",
-                            phoneNo: "0123456789",
-                            savedImageUrl: "https://combank-vibe.vercel.app/images/1684490539265_happy-black-teen-boy-outside-african-american-smiles-sitting-bench-192130399.jpg",
+                            name: name,
+                            age: age,
+                            gender: gender,
+                            location: country,
+                            ambition: ambition,
+                            email: email,
+                            phoneNo: phoneNo,
+                            savedImageUrl: savedImageUrl,
                         }
                     ),
                 });
@@ -101,9 +101,9 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                     throw dataBackend.error || new Error(`Request failed with status ${response.status}`);
                 }
                 setResId(dataBackend.id)
-                console.log("respons backend : ",dataBackend)
+                console.log("respons backend : ", dataBackend)
 
-
+                // chat gpt generate
                 const responseOpenAi = await fetch("/api/generate", {
                     method: "POST",
                     headers: {
@@ -139,7 +139,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
         }
 
     };
-   
+
     // store in local storage
     useEffect(() => {
         if (aiMessage) {
