@@ -77,6 +77,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
             try {
                 // data to backend
+                console.log(`data : ${name} , ${age} ,${gender} ,${email} , ${phoneNo}, ${ambition} , ${country}, ${savedImageUrl} `)
                 const response = await fetch("https://it-marketing.website/vibe-backend/api/save-customer-data", {
                     method: "POST",
                     headers: {
@@ -91,7 +92,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                             ambition: ambition,
                             email: email,
                             phoneNo: phoneNo,
-                            savedImageUrl: savedImageUrl,
+                            savedImageUrl: "savedImageUrl",
                         }
                     ),
                 });
@@ -100,31 +101,63 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                 if (response.status !== 200) {
                     throw dataBackend.error || new Error(`Request failed with status ${response.status}`);
                 }
-                setResId(dataBackend.id)
-                console.log("respons backend : ", dataBackend)
+                const resCustomerId = dataBackend.id
+                setResId(resCustomerId)
+                console.log("respons id : ", resCustomerId)
 
                 // chat gpt generate
-                // const responseOpenAi = await fetch("/api/generate", {
-                //     method: "POST",
-                //     headers: {
-                //         "Content-Type": "application/json",
-                //     },
-                //     body: JSON.stringify(
-                //         {
-                //             name: name,
-                //             age: age,
-                //             location: country,
-                //             ambition: ambition,
-                //         }
-                //     ),
-                // });
+                const responseOpenAi = await fetch("/api/generate", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(
+                        {
+                            name: name,
+                            age: age,
+                            location: country,
+                            ambition: ambition,
+                        }
+                    ),
+                });
 
-                // const data = await responseOpenAi.json();
-                // if (responseOpenAi.status !== 200) {
-                //     throw data.error || new Error(`Request failed with status ${responseOpenAi.status}`);
+                const data = await responseOpenAi.json();
+                if (responseOpenAi.status !== 200) {
+                    throw data.error || new Error(`Request failed with status ${responseOpenAi.status}`);
+                }
+                setAiMessage(data.result)
+                console.log(aiMessage.toString())
+
+
+                // try {
+                setTimeout(async () => {
+                    console.log("resId : ", resId)
+                    console.log("ai message : ", aiMessage)
+
+                    const responseAiMessage = await fetch("https://it-marketing.website/vibe-backend/api/save-customer-ambition-response", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(
+                            {
+                                customerId: resId,
+                                ambitionResponse: aiMessage
+                            }
+                        ),
+                    });
+
+                    const dataAiMessage = await responseAiMessage.json();
+                    if (responseAiMessage.status !== 200) {
+                        throw dataAiMessage.error || new Error(`Request failed with status ${responseAiMessage.status}`);
+                    }
+                    console.log(dataAiMessage)
+                }, 10000);
+                // } catch (error) {
+                //     console.log(error)
                 // }
-                // setAiMessage(data.result)
-                // console.log(aiMessage.toString())
+
+
 
                 setIsLoading(false);
                 router.push('/success');
@@ -169,8 +202,8 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                                     <input type="text" required placeholder="Your Name" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setName(e.target.value)} />
                                                     <input type="text" required placeholder="Your Age" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setAge(e.target.value)} />
                                                     <input type="text" required placeholder="Your Gender" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setGender(e.target.value)} />
-                                                    <input type="email" required placeholder="Your Email" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setEmail(e.target.value)} />
-                                                    <input type="tel" required placeholder="Your Phone Number" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setPhoneNo(e.target.value)} />
+                                                    <input type="text" required placeholder="Your Email" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setEmail(e.target.value)} />
+                                                    <input type="text" required placeholder="Your Phone Number" className="mb-2 py-3 px-3 w-100 transparent-input" onChange={(e) => setPhoneNo(e.target.value)} />
                                                     <select className="mb-2 py-3 px-3 w-100 transparent-input" required onChange={(e) => setCountry(e.target.value)}>
                                                         <option value="">Select your country</option>
                                                         <option value="United States">United States</option>
