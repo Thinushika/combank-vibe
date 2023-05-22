@@ -32,20 +32,13 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
     const [selectedFile, setSelectedFile] = useState<File>();
     const router = useRouter();
 
-    useEffect(() => {
-        // if (dirs.length > 0) {
-        //     const latestDir = dirs[dirs.length - 1]; 
-        //     setSavedImageUrl(`https://localhost:3000/images/${latestDir}`);
-        //     console.log('savedImageUrl:', savedImageUrl);
-        //   }
 
-        if (dirs.length > 0) {
-            const latestDir = dirs[dirs.length - 1];
-            setSavedImageUrl(`https://combank-vibe.vercel.app/images/${latestDir}`);
-            console.log('savedImageUrl:', savedImageUrl);
-        }
+    // get latest dir and update variables
+    useEffect(() => {
 
     }, [dirs, name, age, gender, country, ambition, email, phoneNo, aiMessage, resId, savedImageUrl])
+
+    
 
 
     // handle image upload
@@ -61,6 +54,26 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
         }
     }
 
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+          const file = event.target.files[0];
+          setSelectedImage(URL.createObjectURL(file));
+          setSelectedFile(file);
+        }
+      };
+
+    // get latest dir and update variables
+    useEffect(() => {
+
+        if (dirs.length > 0) {
+            const latestDir = dirs[dirs.length - 1];
+            setSavedImageUrl(`https://combank-vibe.vercel.app/images/${latestDir}`);
+            
+        }
+
+    }, [dirs, selectedFile])
+    console.log('savedImageUrl:', savedImageUrl);
+
 
     // checkbox
     const handleCheckboxChange = (event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
@@ -71,7 +84,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        handleUpload()
+        await handleUpload()
 
         if (isChecked) {
             console.log('checked')
@@ -227,13 +240,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                                         <input
                                                             type="file"
                                                             id="upload-input"
-                                                            onChange={({ target }) => {
-                                                                if (target.files) {
-                                                                    const file = target.files[0];
-                                                                    setSelectedImage(URL.createObjectURL(file));
-                                                                    setSelectedFile(file)
-                                                                }
-                                                            }}
+                                                            onChange={handleFileChange}
                                                         />
                                                         <div className="d-flex rounded justify-content-center align-items-center curser-pointer" style={{ width: '200px' }}>
                                                             {
@@ -245,7 +252,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                                             }
                                                         </div>
                                                     </label>
-                                                    {/* <Link href={savedImageUrl}>{savedImageUrl}</Link> */}
+                                                    <Link href={savedImageUrl}>{selectedImage}</Link>
 
                                                     <label className='d-flex flex-row text-white text-start px-3 mt-2'>
                                                         <input
