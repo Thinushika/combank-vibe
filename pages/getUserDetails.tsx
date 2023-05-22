@@ -245,7 +245,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                                                             }
                                                         </div>
                                                     </label>
-                                                    <Link href={savedImageUrl}>{savedImageUrl}</Link>
+                                                    {/* <Link href={savedImageUrl}>{savedImageUrl}</Link> */}
 
                                                     <label className='d-flex flex-row text-white text-start px-3 mt-2'>
                                                         <input
