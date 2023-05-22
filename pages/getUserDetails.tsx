@@ -130,29 +130,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
 
 
                 // try {
-                setTimeout(async () => {
-                    console.log("resId : ", resId)
-                    console.log("ai message : ", aiMessage)
-
-                    const responseAiMessage = await fetch("https://it-marketing.website/vibe-backend/api/save-customer-ambition-response", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(
-                            {
-                                customerId: resId,
-                                ambitionResponse: aiMessage
-                            }
-                        ),
-                    });
-
-                    const dataAiMessage = await responseAiMessage.json();
-                    if (responseAiMessage.status !== 200) {
-                        throw dataAiMessage.error || new Error(`Request failed with status ${responseAiMessage.status}`);
-                    }
-                    console.log(dataAiMessage)
-                }, 10000);
+                
                 // } catch (error) {
                 //     console.log(error)
                 // }
@@ -178,6 +156,31 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
         if (aiMessage) {
             localStorage.setItem('aiMessage', aiMessage);
             localStorage.setItem('ambition', ambition);
+
+            const sendMessage = async (aiMessage: string)=>{
+                console.log("resId : ", resId)
+                    console.log("ai message : ", aiMessage)
+
+                    const responseAiMessage = await fetch("https://it-marketing.website/vibe-backend/api/save-customer-ambition-response", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(
+                            {
+                                customerId: resId,
+                                ambitionResponse: aiMessage
+                            }
+                        ),
+                    });
+
+                    const dataAiMessage = await responseAiMessage.json();
+                    if (responseAiMessage.status !== 200) {
+                        throw dataAiMessage.error || new Error(`Request failed with status ${responseAiMessage.status}`);
+                    }
+                    console.log(dataAiMessage)
+            }
+            sendMessage(aiMessage)
         }
     }, [aiMessage, ambition]);
 
