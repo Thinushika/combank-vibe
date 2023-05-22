@@ -38,6 +38,13 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
         //     setSavedImageUrl(`https://localhost:3000/images/${latestDir}`);
         //     console.log('savedImageUrl:', savedImageUrl);
         //   }
+
+        if (dirs.length > 0) {
+            const latestDir = dirs[dirs.length - 1];
+            setSavedImageUrl(`https://combank-vibe.vercel.app/images/${latestDir}`);
+            console.log('savedImageUrl:', savedImageUrl);
+        }
+
     }, [dirs, name, age, gender, country, ambition, email, phoneNo, aiMessage, resId, savedImageUrl])
 
 
@@ -69,11 +76,6 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
         if (isChecked) {
             console.log('checked')
             setIsLoading(true);
-            if (dirs.length > 0) {
-                const latestDir = dirs[dirs.length - 1];
-                setSavedImageUrl(`https://combank-vibe.vercel.app/images/${latestDir}`);
-                console.log('savedImageUrl:', savedImageUrl);
-            }
 
             try {
                 // data to backend
