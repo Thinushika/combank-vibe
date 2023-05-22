@@ -101,7 +101,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
                     throw dataBackend.error || new Error(`Request failed with status ${response.status}`);
                 }
                 setResId(dataBackend.id)
-                console.log(aiMessage.toString())
+                console.log("respons backend : ",dataBackend)
 
 
                 const responseOpenAi = await fetch("/api/generate", {
