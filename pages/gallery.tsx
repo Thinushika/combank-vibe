@@ -25,7 +25,9 @@ const Gallery = () => {
                                 <h2 className="text-white font-36">GALLERY</h2>
                                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 px-5">
                                     <div className="p-2">
+                                        <Link href={"/shareImage"}>
                                         <Image src={'/sliderimg-1.png'} className='mb-5' alt='' width={200} height={200} ></Image>
+                                        </Link>
                                     </div>
                                     <div className="p-2">
                                         <Image src={'/sliderimg-2.png'} className='mb-5' alt='' width={200} height={200} ></Image>
