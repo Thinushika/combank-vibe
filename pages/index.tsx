@@ -27,7 +27,7 @@ export default function Home() {
               <div className="home_slider_image_container image1 p-0 m-0 ">
                 <div className="d-flex justify-content-center align-items-center align-items-lg-end  w-100 hero-container">
                   <div className="d-flex flex-column justify-content-center align-items-center home-txt-container">
-                    <Image src="/maintxt.png" alt="" className="hero-image mb-lg-2" width={350} height={300} />
+                    <Image src="/txt.png" alt="" className="hero-image mb-lg-2" width={800} height={600} />
                   </div>
                 </div>
                 <div className="d-flex justify-content-center align-items-center b-space w-100 sub-container">
@@ -35,9 +35,9 @@ export default function Home() {
                     <h2 className="text-center px-2 text-white" style={{ fontWeight: "bold" }}>
                       Interested? Check the future you NOW
                     </h2>
-                    <Link href={'/chooseOption'} className='d-flex justify-content-center align-items-center'>
+                    <Link href={'/getUserDetails'} className='d-flex justify-content-center align-items-center'>
                     <button type="submit" className="mt-3" style={{
-                      backgroundColor: "#ee3035", color: "#fff", fontWeight: "bold", height: "50px"
+                      backgroundColor: "#ee3035", color: "#fff", fontWeight: "bold", height: "50px", border:"solid 1px #fff", borderRadius:'6px'
                     }}
                     >
                       Get Started
