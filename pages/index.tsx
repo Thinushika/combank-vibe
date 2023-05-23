@@ -64,11 +64,6 @@ export default function Home() {
               disableOnInteraction: false,
             }}
             navigation
-            // navigation={{
-            //   nextEl: ".image-swiper-button-next",
-            //   prevEl: ".image-swiper-button-prev",
-            //   disabledClass: "swiper-button-disabled"
-            // }}
           spaceBetween={0}
           slidesPerView={4}
           onSlideChange={() => console.log('slide change')}

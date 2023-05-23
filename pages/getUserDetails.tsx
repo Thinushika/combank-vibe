@@ -47,8 +47,8 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
             if (!selectedFile) return
             const formData = new FormData();
             formData.append("myImage", selectedFile);
-            const { data } = await axios.post("/api/image", formData);
-            console.log("data : ", data)
+            const data  = await axios.post("/api/image", formData);
+            console.log("image data : ", data)
         } catch (error: any) {
             console.log(error.response?.data)
         }
@@ -72,7 +72,7 @@ const UserDetails: NextPage<Props> = ({ dirs }) => {
         }
 
     }, [dirs, selectedFile])
-    console.log('savedImageUrl:', savedImageUrl);
+    
 
 
     // checkbox

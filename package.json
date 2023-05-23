@@ -1,12 +1,11 @@
 {
-  "name": "gpt4-langchain-pdf-chatbot",
+  "name": "vibe-future",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=18"
   },
   "license": "MIT",
-  "author": "Mayooear<twitter:@mayowaoshin>",
   "type": "module",
   "scripts": {
     "dev": "next dev",
